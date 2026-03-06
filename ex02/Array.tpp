@@ -1,23 +1,18 @@
 #include "Array.hpp"
 
-// Default constructor
 template <typename T>
 Array<T>::Array() : _data(NULL), _size(0) {}
 
-// Parametric constructor
 template <typename T>
-Array<T>::Array(unsigned int n) : _size(n) {
-    // Value initialization: int() sets to 0, objects call default constructor
-    _data = new T[n](); 
+Array<T>::Array(unsigned int n) : _data(new T[n]), _size(n) {
 }
 
-// Copy constructor (Deep Copy)
 template <typename T>
-Array<T>::Array(const Array& other) : _data(NULL), _size(0) {
-    *this = other;
+Array<T>::Array(const Array& other):  _data(new T[other._size]) ,_size(other._size){
+			for (unsigned int i = 0; i < _size; i++)
+				_data[i] = other._data[i];
 }
 
-// Assignment operator (Deep Copy)
 template <typename T>
 Array<T>& Array<T>::operator=(const Array& other) {
     if (this != &other) {
@@ -32,14 +27,12 @@ Array<T>& Array<T>::operator=(const Array& other) {
     return *this;
 }
 
-// Destructor
 template <typename T>
 Array<T>::~Array() {
     if (_data)
         delete[] _data;
 }
 
-// Subscript operator (Read/Write)
 template <typename T>
 T& Array<T>::operator[](unsigned int index) {
     if (index >= _size)
@@ -47,7 +40,6 @@ T& Array<T>::operator[](unsigned int index) {
     return _data[index];
 }
 
-// Subscript operator (Read-only)
 template <typename T>
 const T& Array<T>::operator[](unsigned int index) const {
     if (index >= _size)

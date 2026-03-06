@@ -17,9 +17,10 @@ int main() {
 
     // 4. Test Deep Copy
     Array<int> copy = numbers;
-    copy[0] = 42;
     std::cout << "Original[0]: " << numbers[0] << " (remains 0)" << std::endl;
-    std::cout << "Copy[0]: " << copy[0] << " (changed to 42)" << std::endl;
+    std::cout << "Copy[0]: " << copy[0] << " (should be 0)" << std::endl;
+    copy[0] = 42;
+	std::cout << "Copy[0]: " << copy[0] << " (changed to 42)" << std::endl;
 
     // 5. Test Exception
     try {
